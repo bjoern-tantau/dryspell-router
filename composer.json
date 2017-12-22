@@ -9,16 +9,6 @@
       "Dryspell\\Middlewares\\": "src/"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/bjoern-tantau/dryspell-middleware-stack"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/bjoern-tantau/dryspell-http-exceptions"
-    }
-  ],
   "authors": [
     {
       "name": "Björn Tantau",
