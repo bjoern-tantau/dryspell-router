@@ -1,0 +1,33 @@
+{
+  "name": "dryspell/router",
+  "description": "Router middleware to add controllers as middlewares to the stack.",
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dryspell\\Middlewares\\": "src/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/bjoern-tantau/dryspell-middleware-stack"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/bjoern-tantau/dryspell-http-exceptions"
+    }
+  ],
+  "authors": [
+    {
+      "name": "Björn Tantau",
+      "email": "bjoern@bjoern-tantau.de"
+    }
+  ],
+  "require": {
+    "dryspell/middleware-stack": "dev-master",
+    "dryspell/http-exceptions": "dev-master",
+    "danielstjules/stringy": "^3.1"
+  }
+}
