@@ -1,10 +1,12 @@
 <?php
 namespace Dryspell\Tests;
 
+use Dryspell\MiddlewareStackInterface;
 use Dryspell\RequestHandler;
-use Psr\Http\Server\MiddlewareInterface;
 use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\MiddlewareInterface;
 
 /**
  * Tests for RequestHandler
@@ -21,14 +23,14 @@ class RequestHandlerTest extends TestCase
      */
     public function testResponseReturnedWithoutMiddlewares()
     {
-        $response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->getMock();
-        $stack = $this->getMockBuilder(\Dryspell\MiddlewareStackInterface::class)
+        $stack = $this->getMockBuilder(MiddlewareStackInterface::class)
             ->getMock();
         $stack->expects($this->once())
             ->method('next')
             ->willReturn(null);
-        $request = $this->getMockBuilder(\Psr\Http\Message\ServerRequestInterface::class)
+        $request = $this->getMockBuilder(ServerRequestInterface::class)
             ->getMock();
         $handler = new RequestHandler($response, $stack);
         $actual = $handler->handle($request);
@@ -42,16 +44,16 @@ class RequestHandlerTest extends TestCase
      */
     public function testMiddlewareIsProcessed()
     {
-        $response = $this->getMockBuilder(\Psr\Http\Message\ResponseInterface::class)
+        $response = $this->getMockBuilder(ResponseInterface::class)
             ->getMock();
         $middleware = $this->getMockBuilder(MiddlewareInterface::class)
             ->getMock();
-        $stack = $this->getMockBuilder(\Dryspell\MiddlewareStackInterface::class)
+        $stack = $this->getMockBuilder(MiddlewareStackInterface::class)
             ->getMock();
         $stack->expects($this->once())
             ->method('next')
             ->willReturn($middleware);
-        $request = $this->getMockBuilder(\Psr\Http\Message\ServerRequestInterface::class)
+        $request = $this->getMockBuilder(ServerRequestInterface::class)
             ->getMock();
         $handler = new RequestHandler($response, $stack);
         $middleware->expects($this->once())

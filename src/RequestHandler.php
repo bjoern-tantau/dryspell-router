@@ -6,16 +6,20 @@
  */
 namespace Dryspell;
 
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Server\RequestHandlerInterface;
+
 /**
  * Description of RequestHandler
  *
  * @author bjoern
  */
-class RequestHandler implements \Psr\Http\Server\RequestHandlerInterface
+class RequestHandler implements RequestHandlerInterface
 {
     
     /**
-     * @var \Psr\Http\Message\ResponseInterface
+     * @var ResponseInterface
      */
     private $response;
     
@@ -24,7 +28,7 @@ class RequestHandler implements \Psr\Http\Server\RequestHandlerInterface
      */
     private $stack;
     
-    public function __construct(\Psr\Http\Message\ResponseInterface $response, \Dryspell\MiddlewareStackInterface $stack)
+    public function __construct(ResponseInterface $response, MiddlewareStackInterface $stack)
     {
         $this->response = $response;
         $this->stack = $stack;
@@ -33,7 +37,7 @@ class RequestHandler implements \Psr\Http\Server\RequestHandlerInterface
     /**
      * Handle the request and return a response.
      */
-    public function handle(\Psr\Http\Message\ServerRequestInterface $request): \Psr\Http\Message\ResponseInterface
+    public function handle(ServerRequestInterface $request): ResponseInterface
     {
         if ($middleware = $this->stack->next()) {
             return $middleware->process($request, $this);
