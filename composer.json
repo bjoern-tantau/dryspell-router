@@ -6,7 +6,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Dryspell\\Middlewares\\": "src/"
+      "Dryspell\\": "src/"
     }
   },
   "authors": [
