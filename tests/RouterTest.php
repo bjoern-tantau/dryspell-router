@@ -11,7 +11,7 @@ namespace Dryspell\Middlewares\Tests {
     use Dryspell\Middlewares\RouterInterface;
     use Dryspell\Middlewares\Tests\Foo\Bar\GetBaz;
     use Dryspell\MiddlewareStackInterface;
-    use Interop\Http\Server\RequestHandlerInterface;
+    use Psr\Http\Server\RequestHandlerInterface;
     use PHPUnit\Framework\TestCase;
     use Psr\Http\Message\ResponseInterface;
     use Psr\Http\Message\ServerRequestInterface;

@@ -4,8 +4,8 @@ namespace Dryspell\Middlewares;
 
 use Dryspell\Http\Exception\NotFound;
 use Dryspell\MiddlewareStackInterface;
-use Interop\Http\Server\MiddlewareInterface;
-use Interop\Http\Server\RequestHandlerInterface;
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Filter\Word\CamelCaseToUnderscore;
