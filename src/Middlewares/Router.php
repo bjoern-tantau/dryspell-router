@@ -67,7 +67,7 @@ class Router implements MiddlewareInterface, RouterInterface
     ): ResponseInterface {
         $script_name = $request->getServerParams()['SCRIPT_NAME'];
         $request_uri = $request->getRequestTarget();
-        $this->base_path = dirname($script_name) . '/';
+        $this->base_path = dirname($script_name);
         if (strpos($request_uri, $script_name) === 0) {
             $path_uri = substr($request_uri, strlen($script_name));
         } else {
