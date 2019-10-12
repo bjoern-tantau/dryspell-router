@@ -4,13 +4,10 @@ namespace Dryspell\Middlewares;
 
 use Dryspell\Http\Exception\NotFound;
 use Dryspell\MiddlewareStackInterface;
-use Psr\Http\Server\MiddlewareInterface;
-use Psr\Http\Server\RequestHandlerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Filter\Word\CamelCaseToUnderscore;
-use Zend\Filter\Word\UnderscoreToCamelCase;
-
+use Psr\Http\Server\MiddlewareInterface;
+use Psr\Http\Server\RequestHandlerInterface;
 use function Stringy\create as s;
 
 /**
@@ -73,7 +70,7 @@ class Router implements MiddlewareInterface, RouterInterface
         } else {
             $path_uri = substr($request_uri, strlen($this->base_path));
         }
-        $path = urldecode(trim(parse_url($path_uri, PHP_URL_PATH), '/'));
+        $path = urldecode(ltrim(parse_url($path_uri, PHP_URL_PATH), '/'));
 
         $method = strtolower($request->getMethod()) . '_';
 
@@ -92,6 +89,9 @@ class Router implements MiddlewareInterface, RouterInterface
                 break;
             }
             $namespace .= '\\' . s($part)->upperCamelize();
+        }
+        if (!class_exists($controller_name)) {
+            $controller_name = $namespace . '\\' . s($method . 'Index')->upperCamelize();
         }
         if (!class_exists($controller_name)) {
             throw new NotFound($controller_name . ' Not Found');

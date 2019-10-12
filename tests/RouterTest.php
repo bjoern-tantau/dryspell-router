@@ -59,6 +59,8 @@ namespace Dryspell\Middlewares\Tests {
                 [PostIndex::class, '/dryspell/', 'POST'],
                 [GetBaz::class, '/dryspell/foo/bar/baz'],
                 [GetFooBar::class, '/dryspell/foo_bar'],
+                [Foo\Bar\GetIndex::class, '/dryspell/foo/bar'],
+                [Foo\Bar\GetIndex::class, '/dryspell/foo/bar/'],
             ];
         }
 
@@ -180,7 +182,7 @@ namespace Dryspell\Middlewares\Tests {
         {
             $stack = $this->getMiddlewareStackMock();
             $router = new Router('Dryspell\Middlewares\Tests', $stack);
-            $request = $this->getServerRequestMock('/dryspell/foo/bar');
+            $request = $this->getServerRequestMock('/dryspell/foo/barrr');
             $handler = $this->getRequestHandlerMock();
             $router->process($request, $handler);
         }
@@ -323,6 +325,11 @@ namespace Dryspell\Middlewares\Tests\Foo\Bar {
      * @package Dryspell\Middlewares\Tests\Foo\Bar
      */
     class GetBaz
+    {
+
+    }
+
+    class GetIndex
     {
 
     }
